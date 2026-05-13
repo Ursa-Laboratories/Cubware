@@ -1,10 +1,10 @@
-# Wellplate Holder
+# Cub Wellplate Holder
 
 ![Wellplate Holder preview](WellplateHolder.png)
 
-A 3D-printed holder for seating a standard wellplate on the PANDA-BEAR deck.
-This model is the Filmetrics-compatible variant, used when the plate needs to
-be positioned for film-thickness measurements.
+A 3D-printed holder for seating a standard wellplate on the **Cub**
+configuration deck. This model is the Filmetrics-compatible variant,
+used when the plate needs to be positioned for film-thickness measurements.
 
 ## Files
 
@@ -21,8 +21,7 @@ be positioned for film-thickness measurements.
 
 ## Compatibility
 
-- Deck: PANDA-BEAR **Cub only** (does not fit the Cub-XL deck)
-- For the Cub-XL variant see `../ursa_wellplate_holder_conductive/`.
+- Deck: **Cub configuration only** (does not fit the Cub-XL deck)
 
 ## Previewing the 3D model
 
