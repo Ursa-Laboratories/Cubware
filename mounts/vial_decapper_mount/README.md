@@ -9,4 +9,4 @@ Bolts onto the [OT2 backboard](../ot2_backboard/).
 
 | File | Purpose |
 | --- | --- |
-| `PAW-V2 - Electromagnet Mount_REV. 1 - ElectromagnetMount.stl` | Printable electromagnet housing (REV. 1). |
+| `VialDecapperMount.stl` | Printable electromagnet housing. |

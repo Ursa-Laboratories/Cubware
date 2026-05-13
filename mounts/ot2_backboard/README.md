@@ -1,6 +1,6 @@
 # OT2 Backboard
 
-![Backboard preview](Backboard.png)
+![OT2 Backboard preview](OT2Backboard.png)
 
 The OT2 backboard is the central mounting plate that bolts to the
 Opentrons OT-2 frame and serves as the carrier for everything else in
@@ -18,11 +18,11 @@ backboard:
 
 | File | Purpose |
 | --- | --- |
-| `PAW-V2 - OT2Mount_REV. 1 - OT2Mount.stl` | Backboard plate itself (REV. 1). |
-| `PAW-V2 - OT2Mount Spacers_REV. 0 - OT2Mount.stl` | Spacers that set the standoff between the backboard and the OT-2 frame. |
+| `OT2Backboard.stl` | Backboard plate itself. |
+| `Spacers.stl` | Spacers that set the standoff between the backboard and the OT-2 frame. |
 
 ## Previews
 
 | Backboard | Spacers |
 | --- | --- |
-| ![Backboard](Backboard.png) | ![Spacers](Spacers.png) |
+| ![Backboard](OT2Backboard.png) | ![Spacers](Spacers.png) |

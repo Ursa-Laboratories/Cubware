@@ -1,6 +1,6 @@
 # Raspberry Pi Camera Mount
 
-![RPi camera mount preview](CameraMount.png)
+![RPi camera mount preview](RaspberryPiCameraMount.png)
 
 Mount for a Raspberry Pi Camera Module 3. Bolts onto the
 [OT2 backboard](../ot2_backboard/).
@@ -9,4 +9,4 @@ Mount for a Raspberry Pi Camera Module 3. Bolts onto the
 
 | File | Purpose |
 | --- | --- |
-| `PAW-V2 - Raspberry Pi Camera Module 3 Mount_REV. 0 Copy 1 - Part 1.stl` | Printable camera housing. |
+| `RaspberryPiCameraMount.stl` | Printable camera housing. |
