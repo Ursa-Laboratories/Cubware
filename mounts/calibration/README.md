@@ -8,10 +8,10 @@ system.
 
 | File | Purpose |
 | --- | --- |
-| `Opentrons Calibration Base 1 - Part 1.stl` | Calibration base, variant 1. |
-| `Opentrons Calibration Base 2 - Part 1.stl` | Calibration base, variant 2. |
-| `Opentrons Calibration Base 3 - Part 1.stl` | Calibration base, variant 3. |
-| `Opentrons Calibration Block - Part 1.stl` | Calibration block. |
+| `Base1.stl` | Calibration base, variant 1. |
+| `Base2.stl` | Calibration base, variant 2. |
+| `Base3.stl` | Calibration base, variant 3. |
+| `Block.stl` | Calibration block. |
 
 ## Previews
 
