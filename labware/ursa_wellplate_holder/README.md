@@ -1,5 +1,7 @@
 # Wellplate Holder
 
+![Wellplate Holder preview](WellplateHolder.png)
+
 A 3D-printed holder for seating a standard wellplate on the PANDA-BEAR deck.
 This model is the Filmetrics-compatible variant, used when the plate needs to
 be positioned for film-thickness measurements.

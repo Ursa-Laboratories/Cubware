@@ -1,5 +1,7 @@
 # Pipette Tip Rack
 
+![Tip Rack preview](TipRack.png)
+
 A 3D-printed rack for holding disposable pipette tips on the PANDA-BEAR deck.
 Maps to `cubos.src.deck.labware.tip_rack.TipRack`, which inherits from
 `HolderLabware` and exposes a per-tip `tip_present` boolean flag for tracking
