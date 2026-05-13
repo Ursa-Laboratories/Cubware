@@ -10,7 +10,7 @@ to carry.
 
 | Configuration | Gantry hardware | Purpose |
 | --- | --- | --- |
-| **Cub** | SainSmart PROVER 3030 | Compact bench setup. |
+| **Cub** | SainSmart PROVER 3030 | Single-instrument characterization. |
 | **CubXL-PANDA** | SainSmart PROVER 4030XL | Non-contact multi-instrument deck — see [PANDA-BEAR](https://github.com/BU-KABlab/PANDA-BEAR). |
 | **CubXL-ASMI** | SainSmart PROVER 4030XL | Indentation experiments with a force sensor — see [ASMI_new](https://github.com/BU-KABlab/ASMI_new). |
 
