@@ -1,0 +1,14 @@
+# PandaSBSWellplateHolder (deck.labware.well_plate_holder.WellPlateHolder)
+#
+# Class-attribute template for the keyed PandaDeck SBS 96-well plate holder.
+# `location` is intentionally omitted; deck YAMLs supply it per instance.
+
+type: well_plate_holder
+name: panda_sbs_wellplate_holder
+model_name: PandaSBSWellplateHolder
+length: 100.0
+width: 164.0
+height: 6.0
+labware_support_height: 3.0
+labware_seat_height_from_bottom: 3.0
+well_plate_surface_height_from_bottom: 17.35
