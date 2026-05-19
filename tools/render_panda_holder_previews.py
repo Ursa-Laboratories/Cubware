@@ -102,23 +102,42 @@ def render_holder(holder: Part.Shape, spec: HolderSpec, out_path: Path) -> None:
     xz.set_title("X/Z section envelope")
     if spec.long_side_grip_gap_y > 0.0:
         side_base = (spec.outer_x - spec.window_x) / 2.0
-        xz.add_patch(Rectangle((-spec.outer_x / 2, 0), side_base, spec.seat_height, facecolor="#4f8cc9", alpha=0.28, edgecolor="#1f4f79"))
-        xz.add_patch(Rectangle((spec.outer_x / 2 - side_base, 0), side_base, spec.seat_height, facecolor="#4f8cc9", alpha=0.28, edgecolor="#1f4f79"))
-        xz.hlines(spec.seat_height, -spec.plate_width_x / 2, spec.plate_width_x / 2, color="#1f4f79", linestyle="--")
+        xz.add_patch(Rectangle((-spec.outer_x / 2, 0), side_base, spec.registration_top_z, facecolor="#4f8cc9", alpha=0.28, edgecolor="#1f4f79"))
+        xz.add_patch(Rectangle((spec.outer_x / 2 - side_base, 0), side_base, spec.registration_top_z, facecolor="#4f8cc9", alpha=0.28, edgecolor="#1f4f79"))
+        xz.plot(
+            [
+                -spec.pocket_x / 2,
+                -spec.pocket_x / 2,
+                spec.pocket_x / 2,
+                spec.pocket_x / 2,
+            ],
+            [
+                spec.seat_height,
+                spec.registration_top_z,
+                spec.registration_top_z,
+                spec.seat_height,
+            ],
+            color="#1f4f79",
+            linestyle="--",
+        )
     else:
         xz.add_patch(Rectangle((-spec.outer_x / 2, 0), spec.outer_x, spec.body_height, facecolor="#4f8cc9", alpha=0.28, edgecolor="#1f4f79"))
         xz.plot(
             [
                 -spec.pocket_x / 2,
+                -spec.pocket_x / 2,
                 -spec.lead_in_x / 2,
                 spec.lead_in_x / 2,
+                spec.pocket_x / 2,
                 spec.pocket_x / 2,
                 -spec.pocket_x / 2,
             ],
             [
                 spec.seat_height,
+                spec.registration_top_z,
                 spec.body_height,
                 spec.body_height,
+                spec.registration_top_z,
                 spec.seat_height,
                 spec.seat_height,
             ],
@@ -139,15 +158,19 @@ def render_holder(holder: Part.Shape, spec: HolderSpec, out_path: Path) -> None:
     yz.plot(
         [
             -spec.pocket_y / 2,
+            -spec.pocket_y / 2,
             -spec.lead_in_y / 2,
             spec.lead_in_y / 2,
+            spec.pocket_y / 2,
             spec.pocket_y / 2,
             -spec.pocket_y / 2,
         ],
         [
             spec.seat_height,
+            spec.registration_top_z,
             spec.body_height,
             spec.body_height,
+            spec.registration_top_z,
             spec.seat_height,
             spec.seat_height,
         ],
@@ -275,6 +298,12 @@ def main() -> int:
         help="Total seated-pocket clearance over the SBS footprint in mm.",
     )
     parser.add_argument(
+        "--registration-wall-height",
+        type=float,
+        default=HolderSpec.registration_wall_height,
+        help="Straight lower wall height above the 3 mm seat before the lead-in funnel starts.",
+    )
+    parser.add_argument(
         "--lead-in-clearance",
         type=float,
         default=None,
@@ -304,6 +333,7 @@ def main() -> int:
     base_spec = HolderSpec(
         body_height=args.body_height,
         plate_clearance=args.plate_clearance,
+        registration_wall_height=args.registration_wall_height,
     )
     lead_in_clearance = (
         args.lead_in_clearance
@@ -311,12 +341,14 @@ def main() -> int:
         else lead_in_clearance_for_angle(
             base_spec.body_height,
             base_spec.seat_height,
+            base_spec.registration_wall_height,
             args.lead_in_angle_deg,
         )
     )
     spec = HolderSpec(
         body_height=args.body_height,
         plate_clearance=args.plate_clearance,
+        registration_wall_height=args.registration_wall_height,
         lead_in_clearance=lead_in_clearance,
         long_side_grip_gap_y=args.long_side_grip_gap_y,
     )

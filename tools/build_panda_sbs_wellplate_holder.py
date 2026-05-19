@@ -26,7 +26,7 @@ class HolderSpec:
 
     # Snug clearance for nominal SBS plates. This is total clearance across the
     # pocket, not per-side clearance.
-    plate_clearance: float = 0.30 * MM
+    plate_clearance: float = 0.20 * MM
 
     # Body dimensions: spans a 4x4 PandaDeck insert block, with the imported
     # keys landing at the four block corners.
@@ -39,10 +39,13 @@ class HolderSpec:
     window_x: float = 69.0 * MM
     window_y: float = 110.0 * MM
 
-    # Lead-in taper above the seat. The plate lands in the exact pocket at the
-    # seat plane, while the wider top opening helps it fall into place. The
-    # default is the current 60 degree holder: 2 * (3 mm / tan(60 deg)).
-    lead_in_clearance: float = 3.464101615137755 * MM
+    # Straight registration band above the seat. This band, not the upper
+    # funnel, controls the final seated plate location.
+    registration_wall_height: float = 1.50 * MM
+
+    # Lead-in taper above the registration band. This is the total top-opening
+    # increase over the seated pocket, so each side gains half this amount.
+    lead_in_clearance: float = 1.7320508075688776 * MM
 
     # Optional centered access openings on the left/right long rails so a
     # gripper can reach the plate's long sides.
@@ -67,6 +70,14 @@ class HolderSpec:
     @property
     def lead_in_y(self) -> float:
         return self.pocket_y + self.lead_in_clearance
+
+    @property
+    def registration_top_z(self) -> float:
+        return self.seat_height + self.registration_wall_height
+
+    @property
+    def funnel_height(self) -> float:
+        return self.body_height - self.registration_top_z
 
     @property
     def plate_surface_height(self) -> float:
@@ -98,18 +109,35 @@ def centered_rectangle_wire(x_size: float, y_size: float, z: float) -> Part.Wire
     )
 
 
-def tapered_pocket_cut(spec: HolderSpec) -> Part.Shape:
+def validate_spec(spec: HolderSpec) -> None:
+    if spec.plate_clearance <= 0.0:
+        raise ValueError("plate_clearance must be positive")
+    if spec.registration_wall_height <= 0.0:
+        raise ValueError("registration_wall_height must be positive")
+    if spec.registration_top_z >= spec.body_height:
+        raise ValueError("registration_wall_height must leave room for the lead-in funnel")
+    if spec.lead_in_clearance < 0.0:
+        raise ValueError("lead_in_clearance must not be negative")
+
+
+def pocket_cut(spec: HolderSpec) -> Part.Shape:
     bottom = centered_rectangle_wire(spec.pocket_x, spec.pocket_y, spec.seat_height)
+    registration_top = centered_rectangle_wire(
+        spec.pocket_x,
+        spec.pocket_y,
+        spec.registration_top_z,
+    )
     top = centered_rectangle_wire(spec.lead_in_x, spec.lead_in_y, spec.body_height)
-    return Part.makeLoft([bottom, top], True, True, False)
+    return Part.makeLoft([bottom, registration_top, top], True, True, False)
 
 
 def build_body(spec: HolderSpec) -> Part.Shape:
+    validate_spec(spec)
     body = box_centered_xy(spec.outer_x, spec.outer_y, spec.body_height, 0.0)
 
-    # Plate pocket: exact at the 3 mm seat, wider at the top so an SBS plate
-    # self-centers as it drops into the holder.
-    body = body.cut(tapered_pocket_cut(spec))
+    # Two-stage plate pocket: a straight lower band registers the seated plate;
+    # the upper funnel guides lower-precision robotic placement into that band.
+    body = body.cut(pocket_cut(spec))
 
     # Through-window under the well field, leaving a ledge around the skirt.
     window = box_centered_xy(spec.window_x, spec.window_y, spec.body_height + 2.0, -1.0)
@@ -119,7 +147,9 @@ def build_body(spec: HolderSpec) -> Part.Shape:
         if spec.long_side_grip_gap_y >= spec.outer_y:
             raise ValueError("long_side_grip_gap_y must be smaller than outer_y")
         gap_reach_x = (spec.outer_x - spec.window_x) / 2.0 + 2.0
-        gap_z_min = spec.seat_height
+        # Keep the lower registration band continuous even where the upper rim
+        # has gripper access gaps, otherwise the seated plate can yaw.
+        gap_z_min = spec.registration_top_z
         for side in (-1.0, 1.0):
             gap = Part.makeBox(
                 gap_reach_x,
@@ -221,11 +251,12 @@ def export_stl(shape: Part.Shape, path: Path, *, orient_for_print: bool = False)
 def lead_in_clearance_for_angle(
     body_height: float,
     seat_height: float,
+    registration_wall_height: float,
     angle_degrees: float,
 ) -> float:
-    ramp_height = body_height - seat_height
+    ramp_height = body_height - (seat_height + registration_wall_height)
     if ramp_height <= 0:
-        raise ValueError("body_height must be greater than seat_height")
+        raise ValueError("registration_wall_height must leave room for the lead-in funnel")
     if angle_degrees <= 0.0 or angle_degrees >= 90.0:
         raise ValueError("lead-in angle must be between 0 and 90 degrees")
 
@@ -235,8 +266,17 @@ def lead_in_clearance_for_angle(
     return 2.0 * per_side_offset
 
 
-def default_lead_in_clearance(body_height: float, seat_height: float) -> float:
-    return lead_in_clearance_for_angle(body_height, seat_height, 45.0)
+def default_lead_in_clearance(
+    body_height: float,
+    seat_height: float,
+    registration_wall_height: float,
+) -> float:
+    return lead_in_clearance_for_angle(
+        body_height,
+        seat_height,
+        registration_wall_height,
+        60.0,
+    )
 
 
 def main() -> int:
@@ -274,6 +314,12 @@ def main() -> int:
         help="Total seated-pocket clearance over the SBS footprint in mm.",
     )
     parser.add_argument(
+        "--registration-wall-height",
+        type=float,
+        default=HolderSpec.registration_wall_height,
+        help="Straight lower wall height above the 3 mm seat before the lead-in funnel starts.",
+    )
+    parser.add_argument(
         "--lead-in-clearance",
         type=float,
         default=None,
@@ -299,6 +345,7 @@ def main() -> int:
     base_spec = HolderSpec(
         body_height=args.body_height,
         plate_clearance=args.plate_clearance,
+        registration_wall_height=args.registration_wall_height,
     )
     lead_in_clearance = (
         args.lead_in_clearance
@@ -306,12 +353,14 @@ def main() -> int:
         else lead_in_clearance_for_angle(
             base_spec.body_height,
             base_spec.seat_height,
+            base_spec.registration_wall_height,
             args.lead_in_angle_deg,
         )
     )
     spec = HolderSpec(
         body_height=args.body_height,
         plate_clearance=args.plate_clearance,
+        registration_wall_height=args.registration_wall_height,
         lead_in_clearance=lead_in_clearance,
         long_side_grip_gap_y=args.long_side_grip_gap_y,
     )
@@ -352,7 +401,9 @@ def main() -> int:
     print(f"plate_clearance_total_mm: {spec.plate_clearance:.3f}")
     print(f"holder_body_height_mm: {spec.body_height:.3f}")
     print(f"seat_height_mm: {spec.seat_height:.3f}")
-    print(f"angled_wall_height_mm: {spec.body_height - spec.seat_height:.3f}")
+    print(f"registration_wall_height_mm: {spec.registration_wall_height:.3f}")
+    print(f"registration_top_z_mm: {spec.registration_top_z:.3f}")
+    print(f"funnel_height_mm: {spec.funnel_height:.3f}")
     print(f"lead_in_horizontal_offset_per_side_mm: {spec.lead_in_clearance / 2.0:.3f}")
     print(f"lead_in_angle_from_horizontal_deg: {args.lead_in_angle_deg:.3f}")
     print(f"long_side_grip_gap_y_mm: {spec.long_side_grip_gap_y:.3f}")
