@@ -1,5 +1,7 @@
 # Panda Deck (Polycarbonate Base Plate)
 
+![Panda Deck preview](PandaDeck.png)
+
 Base plate for the **Cub-XL** intended for use with non-contact instruments.
 Reproduces the deck layout of the original
 [PANDA-BEAR](https://github.com/BU-KABlab/PANDA-BEAR) configuration, so any
