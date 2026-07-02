@@ -11,7 +11,8 @@ to fabricate hardware for a Cub system.
 Cubware/
 ├── labware/   # Deck accessories: holders, racks, plates, etc.
 ├── gantry/    # Gantry parts and assemblies
-└── mounts/    # Mounts and brackets for attaching hardware to the system
+├── mounts/    # Mounts and brackets for attaching hardware to the system
+└── documentation/ # Build guides and hardware assembly notes
 ```
 
 Each part lives in its own folder so that it can carry its own README,
@@ -32,6 +33,12 @@ Inside each part folder you may find:
 
 Not every folder has every file type — some parts are mesh-only, some are
 CAD-only, and some labware additionally ship a YAML definition.
+
+## Documentation
+
+- [Vial Capper / Decapper Build Guide](documentation/vial-capper-decapper-build.md)
+  covers the PANDA capper/decapper BOM, cap fabrication, vial-holder setup,
+  Arduino wiring, and CubOS integration status.
 
 ## Adding a new part
 

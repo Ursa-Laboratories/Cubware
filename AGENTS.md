@@ -11,6 +11,7 @@ design files for the Cub / CubOS ecosystem.
 | `labware/` | Deck accessories: holders, racks, tip racks, calibration plates that ship as Cub "labware" (each with a CubOS YAML config). |
 | `gantry/`  | Gantry parts and base plates that define the deck geometry of a Cub configuration. |
 | `mounts/`  | Mounts and brackets that bolt instrumentation onto a Cub system. |
+| `documentation/` | Build guides and hardware assembly notes that span more than one part folder. |
 | `scripts/` | Tooling — currently just the preview-render script. |
 
 Within each top-level directory, every part has its own folder so it
