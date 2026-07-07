@@ -1,3 +1,5 @@
+> Org-wide baseline: [`AGENTS.org.md`](./AGENTS.org.md) — this file takes precedence where they overlap.
+
 # Agent Guide
 
 This file tells agents (Claude, Codex, etc.) and humans how to add or
