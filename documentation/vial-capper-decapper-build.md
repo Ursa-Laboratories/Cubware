@@ -53,8 +53,8 @@ existing PAW build.
 | 1 | PAW electromagnet mount | [`3D-prints/PAW/PAW-V2 - ElectromagnetMount.step`](https://github.com/BU-KABlab/PANDA-BEAR/blob/main/documentation/3D-prints/PAW/PAW-V2%20-%20ElectromagnetMount.step) | Mounts the electromagnet to the PAW |
 | Existing PAW build | PAW body and neighboring tool mounts | [`3D-prints/PAW/`](https://github.com/BU-KABlab/PANDA-BEAR/tree/main/documentation/3D-prints/PAW/) | The capper/decapper assumes the PAW is installed on the gantry |
 
-The closest Cubware part pages are the [vial decapper mount](../mounts/vial_decapper_mount/)
-and [9-vial holder](../labware/ursa_vial_holder/). The legacy PANDA build
+The closest Cubware part pages are the [vial decapper mount](../cubxl_plus/instrument_mounts/vial_capper_decapper_mount/)
+and [9-vial holder](../cubxl_plus/labware/vial_holder/). The legacy PANDA build
 assets listed above came from the PANDA-BEAR documentation tree.
 
 ## Fabricate The Custom Vial Caps

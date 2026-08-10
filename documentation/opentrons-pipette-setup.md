@@ -39,16 +39,16 @@ Quantities are for one OT-2 pipette station unless noted.
 
 | Qty | Part | File | Notes |
 | --- | --- | --- | --- |
-| 1 | OT2 backboard mount | [`../mounts/ot2_backboard/`](../mounts/ot2_backboard/) | Main backboard that bolts to the OT-2 frame and carries the PAW-V2 mounts |
-| 1 set | OT2 mount spacers | [`../mounts/ot2_backboard/`](../mounts/ot2_backboard/) | Sets the backboard standoff from the OT-2 frame |
-| 1 | Legacy PAW-V2 OT2 mount | [`../mounts/ot2_backboard/PAW-V2 - OT2Mount_REV. 1 - OT2Mount.stl`](../mounts/ot2_backboard/PAW-V2%20-%20OT2Mount_REV.%201%20-%20OT2Mount.stl) | Cubware STL copy of the legacy PANDA-BEAR OT2 mount |
-| 1 | Tip rack | [`../labware/ursa_tip_rack/`](../labware/ursa_tip_rack/) | CubOS tip-rack labware definition includes `tip_length`, pickup slots, and consumed-tip tracking |
+| 1 | OT2 backboard mount | [`../cubxl_plus/instrument_mounts/backboard/`](../cubxl_plus/instrument_mounts/backboard/) | Main backboard that bolts to the OT-2 frame and carries the PAW-V2 mounts |
+| 1 set | OT2 mount spacers | [`../cubxl_plus/instrument_mounts/backboard/`](../cubxl_plus/instrument_mounts/backboard/) | Sets the backboard standoff from the OT-2 frame |
+| 1 | Legacy PAW-V2 OT2 mount | [`../cubxl_plus/instrument_mounts/backboard/PAW-V2 - OT2Mount_REV. 1 - OT2Mount.stl`](../cubxl_plus/instrument_mounts/backboard/PAW-V2%20-%20OT2Mount_REV.%201%20-%20OT2Mount.stl) | Cubware STL copy of the legacy PANDA-BEAR OT2 mount |
+| 1 | Tip rack | [`../cubxl_plus/labware/tip_rack_holder/`](../cubxl_plus/labware/tip_rack_holder/) | CubOS tip-rack labware definition includes `tip_length`, pickup slots, and consumed-tip tracking |
 | 1 | Used-tip disposal target | CubOS deck YAML `tip_disposal` labware | Needed for `drop_tip` protocol commands |
 
 ## Mount The Pipette
 
 1. Print the OT2 backboard and spacer parts from
-   [`../mounts/ot2_backboard/`](../mounts/ot2_backboard/).
+   [`../cubxl_plus/instrument_mounts/backboard/`](../cubxl_plus/instrument_mounts/backboard/).
 2. Bolt the backboard to the OT-2 frame and confirm the plate is rigid before
    adding the pipette.
 3. Mount the Opentrons pipette with the PAW-V2 OT2 mount hardware.

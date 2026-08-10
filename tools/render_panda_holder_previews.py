@@ -245,17 +245,17 @@ def main() -> int:
     parser.add_argument(
         "--holder-step",
         type=Path,
-        default=Path("labware/panda_sbs_wellplate_holder/PandaSBSWellplateHolder.step"),
+        default=Path("cubxl_plus/labware/well_plate_holder/PandaSBSWellplateHolder.step"),
     )
     parser.add_argument(
         "--deck-step",
         type=Path,
-        default=Path("gantry/polycarb/PandaDeck.step"),
+        default=Path("cubxl_plus/deck/polycarbonate_deck/PandaDeck.step"),
     )
     parser.add_argument(
         "--out-dir",
         type=Path,
-        default=Path("labware/panda_sbs_wellplate_holder"),
+        default=Path("cubxl_plus/labware/well_plate_holder"),
     )
     parser.add_argument(
         "--name",
