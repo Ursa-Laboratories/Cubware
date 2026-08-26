@@ -30,6 +30,7 @@ Quantities are for one OT-2 pipette station unless noted.
 | 1 | Adafruit TMC2209 stepper motor driver breakout | Drives the OT-2 pipette stepper motor | Adafruit `6121` | [Adafruit](https://www.adafruit.com/product/6121) | USD 17.90 |
 | 1 | 10-pin socket/socket IDC cable, 6 in | Connection to the OT-2 pipette | Adafruit `370` | [Adafruit](https://www.adafruit.com/product/370) | USD 2.00 |
 | 1 | Uno R3 proto shield or equivalent | PAW control circuitry | Legacy BOM used Adafruit `2077`; Cubware capper guide notes a generic Uno R3 protoshield alternative | [Adafruit](https://www.adafruit.com/product/2077) | USD 9.95 |
+| 1 pack | Aluminum SMT heat sinks, 10-pack | Heat sink for the TMC2209 stepper driver | Adafruit `1515`, 0.27" x 0.27" x 0.14" | [Adafruit](https://www.adafruit.com/product/1515) | USD 4.95 |
 | 1 set | Jumper wires | Arduino/protoshield wiring | Female-female `4447`, extension `4635`, male-male `4482` | [Adafruit 4447](https://www.adafruit.com/product/4447), [Adafruit 4635](https://www.adafruit.com/product/4635), [Adafruit 4482](https://www.adafruit.com/product/4482) | USD 9.95, USD 11.95, USD 9.95 |
 | 1 | USB extension cable | Communication with PAW hardware | 10-15 ft USB extension, UPC `686878976212` | [Amazon](https://a.co/d/3PqFbSj) | USD 8.99 |
 | 1 kit | M3-M6 bolt kit | Mounting hardware for PAW/backboard parts | Kwokker M3-M6 bolt kit, 20 sizes | [Amazon](https://www.amazon.com/gp/product/B0CLZC8SQ5/) | USD 23.99 |
@@ -74,6 +75,19 @@ Use the diagram as the current wiring reference for the Arduino/TMC2209/pipette
 control interface. The legacy PANDA-BEAR wiring docs point to the external
 [BU-KABlab/PANDA_Arduino](https://github.com/BU-KABlab/PANDA_Arduino)
 repository for firmware source, pin assignments, and installation instructions.
+
+### Attach the Heat Sink to the TMC2209
+
+Before wiring the TMC2209 into the control circuit, fit it with the Adafruit
+`1515` heat sink so the driver doesn't thermal-throttle or shut down under
+sustained plunger moves:
+
+1. Peel the adhesive backing off one heat sink from the Adafruit `1515` pack.
+2. Center the heat sink, fins up, over the TMC2209's driver IC (the largest
+   chip on the breakout) and press firmly for a few seconds to set the
+   thermal tape.
+3. Check that the fins clear the breakout's pin headers and don't foul the
+   protoshield or neighboring components once seated.
 
 Before running pipette commands:
 
